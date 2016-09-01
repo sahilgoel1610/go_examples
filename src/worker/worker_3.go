@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	
-	jobs := make(chan int)
+	jobs := make(chan int,10)
 	result := make(chan int)
 
 	// initilizing a pool of readers. 3 readrs
@@ -12,7 +12,7 @@ func main() {
 		go workers(w, jobs, result)
 	}
 	// go func_rand_reader(jobs)
-	go result_reader(result)
+	// go result_reader(result)
 	insert(jobs)
 
 	fmt.Println("Closing jobs") 
@@ -21,7 +21,7 @@ func main() {
 	// time.Sleep(10*time.Second)
 
 	    // Finally we collect all the results of the work.
-
+	result_reader(result)
 
 }
 
